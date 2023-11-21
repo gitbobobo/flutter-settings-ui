@@ -42,23 +42,23 @@ class _IOSSettingsTileState extends State<IOSSettingsTile> {
     final additionalInfo = IOSSettingsTileAdditionalInfo.of(context);
     final theme = SettingsTheme.of(context);
 
-    return IgnorePointer(
-      ignoring: !widget.enabled,
-      child: Column(
-        children: [
-          buildTitle(
+    return Column(
+      children: [
+        IgnorePointer(
+          ignoring: !widget.enabled,
+          child:  buildTitle(
             context: context,
             theme: theme,
             additionalInfo: additionalInfo,
           ),
-          if (widget.description != null)
-            buildDescription(
-              context: context,
-              theme: theme,
-              additionalInfo: additionalInfo,
-            ),
-        ],
-      ),
+        ),
+        if (widget.description != null)
+          buildDescription(
+            context: context,
+            theme: theme,
+            additionalInfo: additionalInfo,
+          ),
+      ],
     );
   }
 
