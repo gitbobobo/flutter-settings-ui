@@ -23,6 +23,9 @@ enum DevicePlatform {
   /// Web
   web,
 
+  /// TV 端，安卓 TV 或 Apple TV 通用
+  tv,
+
   /// Use this to specify you want to use the default device platform
   device,
 }

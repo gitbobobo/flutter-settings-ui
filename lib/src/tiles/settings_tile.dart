@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:settings_ui/src/tiles/abstract_settings_tile.dart';
 import 'package:settings_ui/src/tiles/platforms/android_settings_tile.dart';
 import 'package:settings_ui/src/tiles/platforms/ios_settings_tile.dart';
+import 'package:settings_ui/src/tiles/platforms/tv_settings_tile.dart';
 import 'package:settings_ui/src/tiles/platforms/web_settings_tile.dart';
 import 'package:settings_ui/src/utils/platform_utils.dart';
 import 'package:settings_ui/src/utils/settings_theme.dart';
@@ -16,6 +17,9 @@ class SettingsTile extends AbstractSettingsTile {
     required this.title,
     this.description,
     this.onPressed,
+    this.onArrowLeftPressed,
+    this.onArrowRightPressed,
+    this.onFocusChange,
     this.enabled = true,
     Key? key,
   }) : super(key: key) {
@@ -32,6 +36,9 @@ class SettingsTile extends AbstractSettingsTile {
     required this.title,
     this.description,
     this.onPressed,
+    this.onArrowLeftPressed,
+    this.onArrowRightPressed,
+    this.onFocusChange,
     this.enabled = true,
     Key? key,
   }) : super(key: key) {
@@ -50,6 +57,9 @@ class SettingsTile extends AbstractSettingsTile {
     required this.title,
     this.description,
     this.onPressed,
+    this.onArrowLeftPressed,
+    this.onArrowRightPressed,
+    this.onFocusChange,
     this.enabled = true,
     Key? key,
   }) : super(key: key) {
@@ -71,6 +81,9 @@ class SettingsTile extends AbstractSettingsTile {
 
   /// A function that is called by tap on a tile
   final Function(BuildContext context)? onPressed;
+  final Function(BuildContext context)? onArrowLeftPressed;
+  final Function(BuildContext context)? onArrowRightPressed;
+  final Function(FocusNode focusNode)? onFocusChange;
 
   late final Color? activeSwitchColor;
   late final Widget? value;
@@ -99,6 +112,23 @@ class SettingsTile extends AbstractSettingsTile {
           activeSwitchColor: activeSwitchColor,
           initialValue: initialValue ?? false,
           trailing: trailing,
+        );
+      case DevicePlatform.tv:
+        return TVSettingsTile(
+          description: description,
+          onPressed: onPressed,
+          onArrowLeftPressed: onArrowLeftPressed,
+          onArrowRightPressed: onArrowRightPressed,
+          onToggle: onToggle,
+          onFocusChange: onFocusChange,
+          tileType: tileType,
+          value: value,
+          leading: leading,
+          title: title,
+          trailing: trailing,
+          enabled: enabled,
+          activeSwitchColor: activeSwitchColor,
+          initialValue: initialValue ?? false,
         );
       case DevicePlatform.iOS:
       case DevicePlatform.macOS:

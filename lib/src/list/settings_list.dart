@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:settings_ui/src/sections/abstract_settings_section.dart';
+import 'package:settings_ui/src/sections/settings_section.dart';
 import 'package:settings_ui/src/utils/platform_utils.dart';
 import 'package:settings_ui/src/utils/settings_theme.dart';
 import 'package:settings_ui/src/utils/theme_provider.dart';
@@ -17,7 +18,7 @@ enum ApplicationType {
   both,
 }
 
-class SettingsList extends StatelessWidget {
+class SettingsList extends StatefulWidget {
   const SettingsList({
     required this.sections,
     this.shrinkWrap = false,
@@ -42,12 +43,17 @@ class SettingsList extends StatelessWidget {
   final ApplicationType applicationType;
 
   @override
+  State<SettingsList> createState() => _SettingsListState();
+}
+
+class _SettingsListState extends State<SettingsList> {
+  @override
   Widget build(BuildContext context) {
     DevicePlatform platform;
-    if (this.platform == null || this.platform == DevicePlatform.device) {
+    if (widget.platform == null || widget.platform == DevicePlatform.device) {
       platform = PlatformUtils.detectPlatform(context);
     } else {
-      platform = this.platform!;
+      platform = widget.platform!;
     }
 
     final brightness = calculateBrightness(context);
@@ -56,7 +62,24 @@ class SettingsList extends StatelessWidget {
       context: context,
       platform: platform,
       brightness: brightness,
-    ).merge(theme: brightness == Brightness.dark ? darkTheme : lightTheme);
+    ).merge(
+        theme: brightness == Brightness.dark
+            ? widget.darkTheme
+            : widget.lightTheme);
+
+    final sectionList = ListView.builder(
+      physics: widget.physics,
+      shrinkWrap: widget.shrinkWrap,
+      itemCount: widget.sections.length,
+      padding:
+          widget.contentPadding ?? calculateDefaultPadding(platform, context),
+      itemBuilder: (BuildContext context, int index) {
+        return SettingsSectionAdditionalInfo(
+          sectionIndex: index,
+          child: widget.sections[index],
+        );
+      },
+    );
 
     return Container(
       color: themeData.settingsListBackground,
@@ -65,15 +88,7 @@ class SettingsList extends StatelessWidget {
       child: SettingsTheme(
         themeData: themeData,
         platform: platform,
-        child: ListView.builder(
-          physics: physics,
-          shrinkWrap: shrinkWrap,
-          itemCount: sections.length,
-          padding: contentPadding ?? calculateDefaultPadding(platform, context),
-          itemBuilder: (BuildContext context, int index) {
-            return sections[index];
-          },
-        ),
+        child: sectionList,
       ),
     );
   }
@@ -84,6 +99,7 @@ class SettingsList extends StatelessWidget {
       double padding = (MediaQuery.of(context).size.width - 810) / 2;
       switch (platform) {
         case DevicePlatform.android:
+        case DevicePlatform.tv:
         case DevicePlatform.fuchsia:
         case DevicePlatform.linux:
         case DevicePlatform.iOS:
@@ -105,6 +121,7 @@ class SettingsList extends StatelessWidget {
     }
     switch (platform) {
       case DevicePlatform.android:
+      case DevicePlatform.tv:
       case DevicePlatform.fuchsia:
       case DevicePlatform.linux:
       case DevicePlatform.iOS:
@@ -126,13 +143,13 @@ class SettingsList extends StatelessWidget {
     final cupertinoBrightness = CupertinoTheme.of(context).brightness ??
         MediaQuery.of(context).platformBrightness;
 
-    switch (applicationType) {
+    switch (widget.applicationType) {
       case ApplicationType.material:
         return materialBrightness;
       case ApplicationType.cupertino:
         return cupertinoBrightness;
       case ApplicationType.both:
-        return platform != DevicePlatform.iOS
+        return widget.platform != DevicePlatform.iOS
             ? materialBrightness
             : cupertinoBrightness;
     }

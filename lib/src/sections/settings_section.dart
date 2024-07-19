@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:settings_ui/src/sections/abstract_settings_section.dart';
 import 'package:settings_ui/src/sections/platforms/android_settings_section.dart';
 import 'package:settings_ui/src/sections/platforms/ios_settings_section.dart';
+import 'package:settings_ui/src/sections/platforms/tv_settings_section.dart';
 import 'package:settings_ui/src/sections/platforms/web_settings_section.dart';
 import 'package:settings_ui/src/tiles/abstract_settings_tile.dart';
 import 'package:settings_ui/src/utils/platform_utils.dart';
@@ -32,6 +33,12 @@ class SettingsSection extends AbstractSettingsSection {
           tiles: tiles,
           margin: margin,
         );
+      case DevicePlatform.tv:
+        return TVSettingsSection(
+          title: title,
+          tiles: tiles,
+          margin: margin,
+        );
       case DevicePlatform.iOS:
       case DevicePlatform.macOS:
       case DevicePlatform.windows:
@@ -52,5 +59,28 @@ class SettingsSection extends AbstractSettingsSection {
           'Incorrect platform: SettingsSection.build',
         );
     }
+  }
+}
+
+class SettingsSectionAdditionalInfo extends InheritedWidget {
+  final int sectionIndex;
+
+  SettingsSectionAdditionalInfo({
+    required this.sectionIndex,
+    required Widget child,
+  }) : super(child: child);
+
+  @override
+  bool updateShouldNotify(SettingsSectionAdditionalInfo old) => true;
+
+  static SettingsSectionAdditionalInfo of(BuildContext context) {
+    final SettingsSectionAdditionalInfo? result = context
+        .dependOnInheritedWidgetOfExactType<SettingsSectionAdditionalInfo>();
+    // assert(result != null, 'No IOSSettingsTileAdditionalInfo found in context');
+    return result ??
+        SettingsSectionAdditionalInfo(
+          sectionIndex: -1,
+          child: SizedBox(),
+        );
   }
 }

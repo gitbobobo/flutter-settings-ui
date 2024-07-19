@@ -14,6 +14,7 @@ class ThemeProvider {
       case DevicePlatform.linux:
         return _androidTheme(context: context, brightness: brightness);
       case DevicePlatform.iOS:
+      case DevicePlatform.tv:
       case DevicePlatform.macOS:
       case DevicePlatform.windows:
         return _iosTheme(context: context, brightness: brightness);
