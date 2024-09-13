@@ -4,6 +4,7 @@ import 'package:settings_ui/src/tiles/platforms/android_settings_tile.dart';
 import 'package:settings_ui/src/tiles/platforms/ios_settings_tile.dart';
 import 'package:settings_ui/src/tiles/platforms/tv_settings_tile.dart';
 import 'package:settings_ui/src/tiles/platforms/web_settings_tile.dart';
+import 'package:settings_ui/src/tiles/platforms/windows_settings_tile.dart';
 import 'package:settings_ui/src/utils/platform_utils.dart';
 import 'package:settings_ui/src/utils/settings_theme.dart';
 
@@ -113,6 +114,20 @@ class SettingsTile extends AbstractSettingsTile {
           initialValue: initialValue ?? false,
           trailing: trailing,
         );
+      case DevicePlatform.windows:
+        return WindowsSettingsTile(
+         description: description,
+          onPressed: onPressed,
+          onToggle: onToggle,
+          tileType: tileType,
+          value: value,
+          leading: leading,
+          title: title,
+          enabled: enabled,
+          activeSwitchColor: activeSwitchColor,
+          initialValue: initialValue ?? false,
+          trailing: trailing,
+        );
       case DevicePlatform.tv:
         return TVSettingsTile(
           description: description,
@@ -132,7 +147,6 @@ class SettingsTile extends AbstractSettingsTile {
         );
       case DevicePlatform.iOS:
       case DevicePlatform.macOS:
-      case DevicePlatform.windows:
         return IOSSettingsTile(
           description: description,
           onPressed: onPressed,

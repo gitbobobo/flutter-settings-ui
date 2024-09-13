@@ -4,6 +4,7 @@ import 'package:settings_ui/src/sections/platforms/android_settings_section.dart
 import 'package:settings_ui/src/sections/platforms/ios_settings_section.dart';
 import 'package:settings_ui/src/sections/platforms/tv_settings_section.dart';
 import 'package:settings_ui/src/sections/platforms/web_settings_section.dart';
+import 'package:settings_ui/src/sections/platforms/windows_settings_section.dart';
 import 'package:settings_ui/src/tiles/abstract_settings_tile.dart';
 import 'package:settings_ui/src/utils/platform_utils.dart';
 import 'package:settings_ui/src/utils/settings_theme.dart';
@@ -33,6 +34,12 @@ class SettingsSection extends AbstractSettingsSection {
           tiles: tiles,
           margin: margin,
         );
+      case DevicePlatform.windows:
+        return WindowsSettingsSection(
+          title: title,
+          tiles: tiles,
+          margin: margin,
+        );
       case DevicePlatform.tv:
         return TVSettingsSection(
           title: title,
@@ -41,7 +48,6 @@ class SettingsSection extends AbstractSettingsSection {
         );
       case DevicePlatform.iOS:
       case DevicePlatform.macOS:
-      case DevicePlatform.windows:
         return IOSSettingsSection(
           title: title,
           tiles: tiles,

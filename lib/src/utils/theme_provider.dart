@@ -13,10 +13,11 @@ class ThemeProvider {
       case DevicePlatform.fuchsia:
       case DevicePlatform.linux:
         return _androidTheme(context: context, brightness: brightness);
+      case DevicePlatform.windows:
+        return _windowsTheme(context: context, brightness: brightness);
       case DevicePlatform.iOS:
       case DevicePlatform.tv:
       case DevicePlatform.macOS:
-      case DevicePlatform.windows:
         return _iosTheme(context: context, brightness: brightness);
       case DevicePlatform.web:
         return _webTheme(context: context, brightness: brightness);
@@ -39,6 +40,72 @@ class ThemeProvider {
     final darkSettingsListBackground = Color.fromRGBO(27, 27, 27, 1);
 
     final lightSettingsTitleColor = Color.fromRGBO(11, 87, 208, 1);
+    final darkSettingsTitleColor = Color.fromRGBO(211, 227, 253, 1);
+
+    final lightTileHighlightColor = Color.fromARGB(255, 220, 220, 220);
+    final darkTileHighlightColor = Color.fromARGB(255, 46, 46, 46);
+
+    final lightSettingsTileTextColor = Color.fromARGB(255, 27, 27, 27);
+    final darkSettingsTileTextColor = Color.fromARGB(255, 240, 240, 240);
+
+    final lightInactiveTitleColor = Color.fromARGB(255, 146, 144, 148);
+    final darkInactiveTitleColor = Color.fromARGB(255, 118, 117, 122);
+
+    final lightInactiveSubtitleColor = Color.fromARGB(255, 197, 196, 201);
+    final darkInactiveSubtitleColor = Color.fromARGB(255, 71, 70, 74);
+
+    final lightTileDescriptionTextColor = Color.fromARGB(255, 70, 70, 70);
+    final darkTileDescriptionTextColor = Color.fromARGB(255, 198, 198, 198);
+
+    final isLight = brightness == Brightness.light;
+
+    final listBackground =
+        isLight ? lightSettingsListBackground : darkSettingsListBackground;
+
+    final titleTextColor =
+        isLight ? lightSettingsTitleColor : darkSettingsTitleColor;
+
+    final settingsTileTextColor =
+        isLight ? lightSettingsTileTextColor : darkSettingsTileTextColor;
+
+    final tileHighlightColor =
+        isLight ? lightTileHighlightColor : darkTileHighlightColor;
+
+    final tileDescriptionTextColor =
+        isLight ? lightTileDescriptionTextColor : darkTileDescriptionTextColor;
+
+    final leadingIconsColor =
+        isLight ? lightLeadingIconsColor : darkLeadingIconsColor;
+
+    final inactiveTitleColor =
+        isLight ? lightInactiveTitleColor : darkInactiveTitleColor;
+
+    final inactiveSubtitleColor =
+        isLight ? lightInactiveSubtitleColor : darkInactiveSubtitleColor;
+
+    return SettingsThemeData(
+      tileHighlightColor: tileHighlightColor,
+      settingsListBackground: listBackground,
+      titleTextColor: titleTextColor,
+      settingsTileTextColor: settingsTileTextColor,
+      tileDescriptionTextColor: tileDescriptionTextColor,
+      leadingIconsColor: leadingIconsColor,
+      inactiveTitleColor: inactiveTitleColor,
+      inactiveSubtitleColor: inactiveSubtitleColor,
+    );
+  }
+
+  static SettingsThemeData _windowsTheme({
+    required BuildContext context,
+    required Brightness brightness,
+  }) {
+    final lightLeadingIconsColor = Color.fromARGB(255, 70, 70, 70);
+    final darkLeadingIconsColor = Color.fromARGB(255, 197, 197, 197);
+
+    final lightSettingsListBackground = Color.fromRGBO(240, 240, 240, 1);
+    final darkSettingsListBackground = Color.fromRGBO(27, 27, 27, 1);
+
+    final lightSettingsTitleColor = Color.fromARGB(255, 50, 50, 50);
     final darkSettingsTitleColor = Color.fromRGBO(211, 227, 253, 1);
 
     final lightTileHighlightColor = Color.fromARGB(255, 220, 220, 220);
