@@ -23,9 +23,17 @@ class AndroidSettingsSection extends StatelessWidget {
     final theme = SettingsTheme.of(context);
     final scaleFactor = MediaQuery.of(context).textScaleFactor;
     final tileList = buildTileList();
+    final margin = this.margin ?? EdgeInsets.fromLTRB(12, 0, 12, 12);
 
     if (title == null) {
-      return tileList;
+      return Container(
+        margin: margin,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: theme.themeData.settingsSectionBackground,
+        ),
+        child: tileList,
+      );
     }
 
     return Column(
@@ -46,7 +54,11 @@ class AndroidSettingsSection extends StatelessWidget {
           ),
         ),
         Container(
-          color: theme.themeData.settingsSectionBackground,
+          margin: margin,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: theme.themeData.settingsSectionBackground,
+          ),
           child: tileList,
         ),
       ],
