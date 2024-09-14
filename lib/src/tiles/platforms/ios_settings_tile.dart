@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:macos_ui/macos_ui.dart';
 import 'package:settings_ui/settings_ui.dart';
 
 class IOSSettingsTile extends StatefulWidget {
@@ -46,7 +47,7 @@ class _IOSSettingsTileState extends State<IOSSettingsTile> {
       children: [
         IgnorePointer(
           ignoring: !widget.enabled,
-          child:  buildTitle(
+          child: buildTitle(
             context: context,
             theme: theme,
             additionalInfo: additionalInfo,
@@ -127,13 +128,7 @@ class _IOSSettingsTileState extends State<IOSSettingsTile> {
       children: [
         if (widget.trailing != null) widget.trailing!,
         if (widget.tileType == SettingsTileType.switchTile)
-          CupertinoSwitch(
-            value: widget.initialValue ?? true,
-            onChanged: widget.onToggle,
-            activeColor: widget.enabled
-                ? widget.activeSwitchColor
-                : theme.themeData.inactiveTitleColor,
-          ),
+          _buildSwitcfhButton(theme),
         if (widget.tileType == SettingsTileType.navigationTile &&
             widget.value != null)
           DefaultTextStyle(
@@ -152,12 +147,31 @@ class _IOSSettingsTileState extends State<IOSSettingsTile> {
               data: IconTheme.of(context)
                   .copyWith(color: theme.themeData.leadingIconsColor),
               child: Icon(
-                widget.enabled ? CupertinoIcons.chevron_forward : CupertinoIcons.lock_fill,
+                widget.enabled
+                    ? CupertinoIcons.chevron_forward
+                    : CupertinoIcons.lock_fill,
                 size: 18 * scaleFactor,
               ),
             ),
           ),
       ],
+    );
+  }
+
+  Widget _buildSwitcfhButton(SettingsTheme theme) {
+    DevicePlatform platform = PlatformUtils.detectPlatform(context);
+    if (platform == DevicePlatform.macOS) {
+      return MacosSwitch(
+        value: widget.initialValue ?? true,
+        onChanged: widget.onToggle,
+      );
+    }
+    return CupertinoSwitch(
+      value: widget.initialValue ?? true,
+      onChanged: widget.onToggle,
+      activeColor: widget.enabled
+          ? widget.activeSwitchColor
+          : theme.themeData.inactiveTitleColor,
     );
   }
 
@@ -175,6 +189,7 @@ class _IOSSettingsTileState extends State<IOSSettingsTile> {
     IOSSettingsTileAdditionalInfo additionalInfo,
   ) {
     final scaleFactor = MediaQuery.of(context).textScaleFactor;
+    DevicePlatform platform = PlatformUtils.detectPlatform(context);
 
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
@@ -235,7 +250,8 @@ class _IOSSettingsTileState extends State<IOSSettingsTile> {
                                 color: widget.enabled
                                     ? theme.themeData.settingsTileTextColor
                                     : theme.themeData.inactiveTitleColor,
-                                fontSize: 16,
+                                fontSize:
+                                    platform == DevicePlatform.macOS ? 14 : 16,
                               ),
                               child: widget.title!,
                             ),
