@@ -54,8 +54,8 @@ class WindowsSettingsTile extends StatelessWidget {
                   }
                 },
           borderRadius: BorderRadius.circular(8),
-          // highlightColor: theme.themeData.tileHighlightColor,
-          splashColor: theme.themeData.tileHighlightColor,
+          highlightColor: theme.themeData.tileHighlightColor,
+          splashColor: Colors.transparent,
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
