@@ -149,7 +149,24 @@ class AndroidSettingsTile extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: trailing!,
-                  )
+                  ),
+                if (tileType == SettingsTileType.navigationTile)
+                  Padding(
+                    padding: const EdgeInsets.only(right: 16),
+                    child: IconTheme(
+                      data: IconTheme.of(context)
+                          .copyWith(color: theme.themeData.leadingIconsColor),
+                      child: enabled
+                          ? Icon(
+                              Icons.chevron_right,
+                              size: 20 * scaleFactor,
+                            )
+                          : Icon(
+                              Icons.lock_outline,
+                              size: 20 * scaleFactor,
+                            ),
+                    ),
+                  ),
               ],
             ),
           ),
