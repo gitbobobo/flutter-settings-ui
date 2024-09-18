@@ -218,7 +218,7 @@ class _IOSSettingsTileState extends State<IOSSettingsTile> {
         padding: EdgeInsetsDirectional.only(start: 18),
         child: Row(
           children: [
-            if (widget.leading != null)
+            if (widget.leading != null && !theme.themeData.hideLeadingIcons)
               Padding(
                 padding: const EdgeInsetsDirectional.only(end: 12.0),
                 child: IconTheme.merge(

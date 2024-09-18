@@ -56,7 +56,7 @@ class AndroidSettingsTile extends StatelessWidget {
           child: Container(
             child: Row(
               children: [
-                if (leading != null)
+                if (leading != null && !theme.themeData.hideLeadingIcons)
                   Padding(
                     padding: const EdgeInsetsDirectional.only(start: 24),
                     child: IconTheme(

@@ -291,7 +291,7 @@ class _TVSettingsTileState extends State<TVSettingsTile> {
               : EdgeInsets.symmetric(vertical: 2, horizontal: 4),
           child: Row(
             children: [
-              if (widget.leading != null)
+              if (widget.leading != null && !theme.themeData.hideLeadingIcons)
                 Padding(
                   padding: const EdgeInsetsDirectional.only(end: 12.0),
                   child: IconTheme.merge(

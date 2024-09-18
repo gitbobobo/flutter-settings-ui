@@ -63,7 +63,7 @@ class WindowsSettingsTile extends StatelessWidget {
             ),
             child: Row(
               children: [
-                if (leading != null)
+                if (leading != null && !theme.themeData.hideLeadingIcons)
                   Padding(
                     padding: const EdgeInsetsDirectional.only(start: 24),
                     child: IconTheme(
