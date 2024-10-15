@@ -43,6 +43,7 @@ class AndroidSettingsTile extends StatelessWidget {
       child: Material(
         color: Colors.transparent,
         child: InkWell(
+          canRequestFocus: false,
           onTap: cantShowAnimation
               ? null
               : () {
@@ -84,7 +85,7 @@ class AndroidSettingsTile extends StatelessWidget {
                             color: enabled
                                 ? theme.themeData.settingsTileTextColor
                                 : theme.themeData.inactiveTitleColor,
-                            fontSize: 18,
+                            fontSize: 16 * scaleFactor,
                             fontWeight: FontWeight.w400,
                           ),
                           child: title ?? Container(),
