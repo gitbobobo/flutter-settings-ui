@@ -129,7 +129,10 @@ class WindowsSettingsTile extends StatelessWidget {
                     children: [
                       trailing!,
                       Padding(
-                          padding: const EdgeInsetsDirectional.only(end: 16),
+                          padding: const EdgeInsetsDirectional.only(
+                            end: 16,
+                            start: 8,
+                          ),
                           child: fluent.ToggleSwitch(
                             checked: initialValue,
                             onChanged: onToggle,
