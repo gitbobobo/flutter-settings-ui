@@ -127,6 +127,9 @@ class _IOSSettingsTileState extends State<IOSSettingsTile> {
     return Row(
       children: [
         if (widget.trailing != null) widget.trailing!,
+        if (widget.trailing != null &&
+            widget.tileType == SettingsTileType.switchTile)
+          SizedBox(width: 8),
         if (widget.tileType == SettingsTileType.switchTile)
           _buildSwitcfhButton(theme),
         if (widget.tileType == SettingsTileType.navigationTile &&
