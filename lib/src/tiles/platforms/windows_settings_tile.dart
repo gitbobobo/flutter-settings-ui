@@ -93,6 +93,7 @@ class WindowsSettingsTile extends StatelessWidget {
                                 : theme.themeData.inactiveTitleColor,
                             fontSize: 18,
                             fontWeight: FontWeight.w400,
+                            fontFamily: theme.themeData.fontFamily,
                           ),
                           child: title ?? Container(),
                         ),
@@ -104,6 +105,7 @@ class WindowsSettingsTile extends StatelessWidget {
                                 color: enabled
                                     ? theme.themeData.tileDescriptionTextColor
                                     : theme.themeData.inactiveSubtitleColor,
+                                fontFamily: theme.themeData.fontFamily,
                               ),
                               child: value!,
                             ),
@@ -116,6 +118,7 @@ class WindowsSettingsTile extends StatelessWidget {
                                 color: enabled
                                     ? theme.themeData.tileDescriptionTextColor
                                     : theme.themeData.inactiveSubtitleColor,
+                                fontFamily: theme.themeData.fontFamily,
                               ),
                               child: description!,
                             ),

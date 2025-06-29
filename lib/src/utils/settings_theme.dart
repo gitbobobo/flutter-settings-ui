@@ -35,6 +35,7 @@ class SettingsThemeData {
     this.inactiveTitleColor,
     this.inactiveSubtitleColor,
     this.hideLeadingIcons = false,
+    this.fontFamily,
   });
 
   final Color? settingsListBackground;
@@ -49,6 +50,8 @@ class SettingsThemeData {
   final Color? inactiveTitleColor;
   final Color? inactiveSubtitleColor;
   final bool hideLeadingIcons;
+    /// 字体
+  final String? fontFamily;
 
   SettingsThemeData merge({
     SettingsThemeData? theme,
@@ -68,6 +71,7 @@ class SettingsThemeData {
       inactiveTitleColor: theme.inactiveTitleColor,
       inactiveSubtitleColor: theme.inactiveSubtitleColor,
       hideLeadingIcons: theme.hideLeadingIcons,
+      fontFamily: theme.fontFamily ?? this.fontFamily,
     );
   }
 
@@ -84,6 +88,7 @@ class SettingsThemeData {
     Color? inactiveTitleColor,
     Color? inactiveSubtitleColor,
     bool? hideLeadingIcons,
+    String? fontFamily,
   }) {
     return SettingsThemeData(
       settingsListBackground:
@@ -103,6 +108,7 @@ class SettingsThemeData {
       settingsTileTextColor:
           settingsTileTextColor ?? this.settingsTileTextColor,
       hideLeadingIcons: hideLeadingIcons ?? this.hideLeadingIcons,
+      fontFamily: fontFamily ?? this.fontFamily,
     );
   }
 }
